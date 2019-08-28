@@ -1,0 +1,25 @@
+{
+  "name": "online_store",
+  "version": "1.0.0",
+  "description": "An online store where users can browse products and add them to their cart",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/drexel-ue/online_store.git"
+  },
+  "author": "Clayton Jones, IKesh Pack <claytonjones839@hotmail.com, packappsforyou@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/drexel-ue/online_store/issues"
+  },
+  "homepage": "https://github.com/drexel-ue/online_store#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "mongoose": "^5.6.11"
+  }
+}
