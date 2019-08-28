@@ -8,8 +8,8 @@ const CategorySchema = new Schema({
   },
   products: [
     {
-      type: String,
-      required: true
+        type: Schema.Types.ObjectId,
+        ref: "products"
     }
   ]
 });
