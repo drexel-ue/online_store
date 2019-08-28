@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
-const CategoryType = require("./category_type");
-const Category = mongoose.model("categories");
+const Product = mongoose.model("products");
 
 const ProductType = new GraphQLObjectType({
   name: "ProductType",
@@ -10,16 +9,19 @@ const ProductType = new GraphQLObjectType({
   fields: () => ({
     _id: { type: GraphQLID },
     name: { type: GraphQLString },
-    category: {
-      type: CategoryType,
-      resolve(product) {
-        return Category.findById(product.category)
-          .then(abode => abode)
-          .catch(err => null);
-      }
-    },
     description: { type: GraphQLString },
-    weight: { type: GraphQLInt }
+    weight: { type: GraphQLInt },
+    category: {
+      type: require("./category_type"),
+      resolve(product) {
+        return Product.findById(product._id)
+          .populate("category")
+          .then(prod => {
+            return prod.category;
+          });
+        // .catch(err => null);
+      }
+    }
   })
 });
 

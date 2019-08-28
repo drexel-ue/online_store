@@ -26,7 +26,6 @@ const RootQueryType = new GraphQLObjectType({
         return await Category.find({});
       }
     },
-
     product: {
       type: ProductType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
