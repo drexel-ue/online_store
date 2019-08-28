@@ -10,7 +10,8 @@ const mongoose = require("mongoose");
 
 const CategoryType = require("./types/category_type");
 const ProductType = require("./types/product_type");
-const UserType = require("./types/product_type");
+const UserType = require("./types/user_type");
+const AuthService = require("../services/auth");
 
 const Category = mongoose.model("categories");
 const Product = mongoose.model("products");
@@ -64,6 +65,17 @@ const mutation = new GraphQLObjectType({
       },
       async resolve(_, { productId, categoryId }) {
         return await Product.updateProductCategory(productId, categoryId);
+      }
+    },
+    register: {
+      type: UserType,
+      args: {
+        name: { type: GraphQLString },
+        email: { type: GraphQLString },
+        password: { type: GraphQLString }
+      },
+      resolve(_, args) {
+        return AuthService.register(args);
       }
     }
   }
