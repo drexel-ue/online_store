@@ -46,4 +46,17 @@ const register = async data => {
   }
 };
 
-module.exports = { register };
+const logout = async ({ _id }) => {
+  try {
+    const user = await User.findById(_id);
+
+    user.token = "";
+    user.loggedIn = false;
+
+    return await user.save();
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { register, logout };
