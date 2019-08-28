@@ -29,8 +29,8 @@ const RootQueryType = new GraphQLObjectType({
     product: {
       type: ProductType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-      async resolve(_, args) {
-        return await User.findById(args._id);
+      async resolve(_, {_id}) {
+        return await Product.findById(_id);
       }
     },
     products: {
