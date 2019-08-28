@@ -6,7 +6,7 @@ const CategoryType = require("./category_type");
 const ProductType = require("./product_type");
 const UserType = require("./user_type");
 
-const Category = mongoos.model("categories");
+const Category = mongoose.model("categories");
 const Product = mongoose.model("products");
 const User = mongoose.model("users");
 

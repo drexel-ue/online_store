@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const graphql = require("graphql");
 const { GraphQLObjectType, GraphQLString, GraphQLID, GraphQLInt } = graphql;
 const CategoryType = require("./category_type");
-const Category = mongoose.model("category");
+const Category = mongoose.model("categories");
 
 const ProductType = new GraphQLObjectType({
   name: "ProductType",
