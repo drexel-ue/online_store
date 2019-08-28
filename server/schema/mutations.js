@@ -38,10 +38,15 @@ const mutation = new GraphQLObjectType({
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         description: { type: new GraphQLNonNull(GraphQLString) },
-        weight: { type: new GraphQLNonNull(GraphQLInt) },
+        weight: { type: new GraphQLNonNull(GraphQLInt) }
       },
       async resolve(_, { name, description, weight, category }) {
-        return await new Product({ name, description, weight, category });
+        return await new Product({
+          name,
+          description,
+          weight,
+          category
+        }).save();
       }
     },
     deleteProduct: {
