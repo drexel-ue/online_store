@@ -30,27 +30,27 @@ const RootQueryType = new GraphQLObjectType({
     product: {
       type: ProductType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(_, args) {
-        return User.findById(args._id);
+      async resolve(_, args) {
+        return await User.findById(args._id);
       }
     },
     products: {
       type: new GraphQLList(ProductType),
-      resolve() {
-        return Product.find({});
+      async resolve() {
+        return await Product.find({});
       }
     },
     user: {
       type: UserType,
       args: { _id: { type: new GraphQLNonNull(GraphQLID) } },
-      resolve(_, args) {
-        return User.findById(args._id);
+      async resolve(_, args) {
+        return await User.findById(args._id);
       }
     },
     users: {
       type: new GraphQLList(UserType),
-      resolve() {
-        return User.find({});
+      async resolve() {
+        return await User.find({});
       }
     }
   })
