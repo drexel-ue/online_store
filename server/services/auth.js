@@ -5,6 +5,7 @@ const keys = require("../../config/keys");
 
 // here is our validator function
 const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
 
 const register = async data => {
   try {
@@ -59,4 +60,32 @@ const logout = async ({ _id }) => {
   }
 };
 
-module.exports = { register, logout };
+const login = async data => {
+  try {
+    // use our other validator we wrote to validate this data
+    const { message, isValid } = validateLoginInput(data);
+
+    if (!isValid) {
+      throw new Error(message);
+    }
+
+    const user = await User.findOne({ email: data.email });
+
+    if (user) {
+      if (await bcrypt.compareSync(data.password, user.password)) {
+        const token = jwt.sign({ id: user._id }, keys.secretOrKey);
+        user.token = token;
+        user.loggedIn = true;
+        return await user.save();
+      } else {
+        throw new Error("Invalid password.");
+      }
+    } else {
+      throw new Error(`No user with email: ${data.email} found.`);
+    }
+  } catch (err) {
+    throw err;
+  }
+};
+
+module.exports = { register, logout, login };
