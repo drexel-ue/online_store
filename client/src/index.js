@@ -9,6 +9,7 @@ import { ApolloProvider } from "react-apollo";
 import { onError } from "apollo-link-error";
 import { ApolloLink } from "apollo-link";
 import { HashRouter } from "react-router-dom";
+import Mutations from "./graphql/mutations";
 
 const cache = new InMemoryCache({
   dataIdFromObject: object => object._id || null
@@ -31,6 +32,26 @@ const client = new ApolloClient({
     console.log("networkError", networkError);
   }
 });
+
+const token = localStorage.getItem("auth-token");
+
+cache.writeData({
+  data: {
+    isLoggedIn: Boolean(token)
+  }
+});
+
+if (token) {
+  client
+    .mutate({ mutation: Mutations.VERIFY_USER, variables: { token } })
+    .then(({ data }) => {
+      cache.writeData({
+        data: {
+          isLoggedIn: data.verifyUser.loggedIn
+        }
+      });
+    });
+}
 
 const Root = () => {
   return (
