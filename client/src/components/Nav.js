@@ -12,16 +12,19 @@ const Nav = props => {
           {({ data }) => {
             if (data.isLoggedIn) {
               return (
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    localStorage.removeItem("auth-token");
-                    client.writeData({ data: { isLoggedIn: false } });
-                    props.history.push("/");
-                  }}
-                >
-                  Logout
-                </button>
+                <div>
+                  <Link to="/newProduct">New</Link>
+                  <button
+                    onClick={e => {
+                      e.preventDefault();
+                      localStorage.removeItem("auth-token");
+                      client.writeData({ data: { isLoggedIn: false } });
+                      props.history.push("/");
+                    }}
+                  >
+                    Logout
+                  </button>
+                </div>
               );
             } else {
               return (

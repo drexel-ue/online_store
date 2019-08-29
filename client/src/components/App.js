@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import ProductIndex from "./products/ProductIndex";
 import ProductDetail from "./products/ProductDetail";
+import CreateProduct from "./products/CreateProduct";
 import AuthRoute from "./AuthRoute";
 import Login from "./session/Login";
 import Register from "./session/Register";
@@ -13,6 +14,12 @@ const App = () => {
       <h1>Online Store</h1>
       <Nav />
       <Switch>
+        <AuthRoute
+          exact
+          path="/newProduct"
+          component={CreateProduct}
+          routeType="protected"
+        />
         <AuthRoute exact path="/login" component={Login} routeType="auth" />
         <AuthRoute
           exact
