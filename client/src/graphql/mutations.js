@@ -9,6 +9,14 @@ export default {
       }
     }
   `,
+  REGISTER_USER: gql`
+    mutation RegisterUser($email: String!, $password: String!, $name: String!) {
+      register(email: $email, password: $password, name: $name) {
+        token
+        loggedIn
+      }
+    }
+  `,
   VERIFY_USER: gql`
     mutation VerifyUser($token: String!) {
       verifyUser(token: $token) {
