@@ -1,12 +1,16 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import ProductIndex from "./products/ProductsIndex";
+import Login from "./Login";
 
 const App = () => {
   return (
     <div>
       <h1>Online Store</h1>
-      <Route exact path="/" component={ProductIndex} />
+      <Switch>
+        <Route exact path="/login" component={Login} />
+        <Route path="/" component={ProductIndex} />
+      </Switch>
     </div>
   );
 };

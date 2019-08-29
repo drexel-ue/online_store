@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Mutation } from "react-apollo";
+import Mutations from "../graphql/mutations";
 
-class Login extends Component {
+export default class Login extends Component {
   constructor(props) {
     super(props);
 
@@ -14,17 +15,16 @@ class Login extends Component {
   update(field) {
     return e => this.setState({ [field]: e.target.value });
   }
-    nder() {
-
+  render() {
     return (
-        <Mutation
-            mutation={LOGIN_USER}
-            onCompleted={data => {
-                const { token } = data.login;
-                localStorage.setItem("auth-token", token);
-                this.props.history.push("/");
-            }}
-        >
+      <Mutation
+        mutation={Mutations.LOGIN_USER}
+        onCompleted={data => {
+          const { token } = data.login;
+          localStorage.setItem("auth-token", token);
+          this.props.history.push("/");
+        }}
+      >
         {loginUser => (
           <div>
             <form
@@ -55,4 +55,5 @@ class Login extends Component {
         )}
       </Mutation>
     );
+  }
 }
